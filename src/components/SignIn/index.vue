@@ -26,7 +26,7 @@
     <el-form-item>
       <el-col :span="1">
         <router-link to="/signup">注册</router-link>
-        <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
+        <el-button type="primary" @click="submitForm('signupForm')">登陆</el-button>
       </el-col>
     </el-form-item>
   </el-form>
@@ -38,7 +38,7 @@
   export default {
     data() {
       return {
-        ruleForm: {
+        signupForm: {
           userName: '',
           password: '',
           capture: '',

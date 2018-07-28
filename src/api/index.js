@@ -1,9 +1,11 @@
-import http from 'http'
+import Axios from 'axios'
 
-const API_BASE = '/api'
+const Config = {
+  API_ROOT: 'http://localhost:3000/api/'
+}
 
 export default {
-  login () {
-    return http.post(`${API_BASE}/login`)
+  register(data) {
+    return Axios.post(Config.API_ROOT + "users", data)
   }
 }
