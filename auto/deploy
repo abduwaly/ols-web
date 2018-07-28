@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker-compose rm --force
+docker-compose up deploy
