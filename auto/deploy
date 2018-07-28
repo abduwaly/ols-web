@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-docker-compose rm --force
-docker-compose up deploy
+#docker-compose rm --force
+#docker-compose up deploy
+docker run -d -p 8082:8080 -v `pwd`:/app -w /app node:9.11.1-alpine sh -c "npm install && npm start"
