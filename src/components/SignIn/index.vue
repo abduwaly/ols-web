@@ -44,7 +44,7 @@
       </el-form-item>
       <el-form-item>
         <el-col :span="24" class="el-col">
-          <el-button class="login-button" type="primary" @click="submitForm('ruleForm')">Sign In</el-button>
+          <el-button class="login-button" type="primary" @click="submitForm('signInForm')">Sign In</el-button>
         </el-col>
       </el-form-item>
       <el-form-item>
@@ -82,7 +82,7 @@
         this.$refs[signInForm].validate((valid) => {
           if (valid) {
             let data = {
-              'name': this.signInForm.userName,
+              'username': this.signInForm.userName,
               'password': this.signInForm.password,
             };
             Axios({
@@ -93,7 +93,7 @@
             })
               .then(res => {
                 if ('username' in res.data) {
-                  router.push({name: 'Login'})
+                  router.push({name: 'StudyCard'})
                 } else if ('message' in res.data) {
                   this.signInForm.message=res.data.message;
                 }
