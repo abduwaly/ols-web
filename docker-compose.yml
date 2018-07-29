@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  base:
+    build: .
+    volumes:
+    - .:/app
+  test:
+    extends:
+      service: base
+    command: 'npm test'
+    tty: true
+  deploy:
+    extends:
+      service: base
+    ports:
+    - "8082:8080"
+    tty: true
+      
+
+
+      

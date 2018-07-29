@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+
+#docker-compose rm --force
+#docker-compose run --rm test
+docker run -v `pwd`:/app -w /app node:9.11.1-alpine sh -c "npm install && npm test"
