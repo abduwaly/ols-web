@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   .page-content{
     width: 500px;
     margin: 0 auto;
