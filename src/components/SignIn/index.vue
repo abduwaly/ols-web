@@ -30,16 +30,16 @@
     <div class="login-header">
       <p class="header-title">思沃学院</p>
     </div>
-    <el-form class="login-form" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px">
+    <el-form class="login-form" :model="signInForm" :rules="rules" ref="signInForm" label-width="120px">
       <h2 class="center">Sign In</h2>
       <el-form-item prop="userName">
         <el-col :span="24" class="el-col">
-          <el-input v-model="ruleForm.userName" placeholder="Username"></el-input>
+          <el-input v-model="signInForm.userName" placeholder="Username"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item prop="password">
         <el-col :span="24" class="el-col">
-          <el-input type="password" v-model="ruleForm.password" placeholder="Password"></el-input>
+          <el-input type="password" v-model="signInForm.password" placeholder="Password"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item>
@@ -62,7 +62,7 @@
   export default {
     data() {
       return {
-        ruleForm: {
+        signInForm: {
           userName: '',
           password: '',
           capture: '',
@@ -78,9 +78,35 @@
       }
     },
     methods: {
-      submitForm(formName) {
-        api.login();
+      submitForm(signInForm) {
+        this.$refs[signInForm].validate((valid) => {
+          if (valid) {
+            let data = {
+              'name': this.signInForm.userName,
+              'password': this.signInForm.password,
+            };
+            Axios({
+              method: 'post',
+              url: '/api/authentication',
+              data: data,
+              config: { headers: {'Content-Type': 'multipart/form-data' }}
+            })
+              .then(res => {
+                if ('username' in res.data) {
+                  router.push({name: 'Login'})
+                } else if ('message' in res.data) {
+                  this.signInForm.message=res.data.message;
+                }
+              })
+              .catch(err => {
+                alert(err)
+              });
+          } else {
+            return false;
+          }
+        })
       }
     }
+
   }
 </script>
