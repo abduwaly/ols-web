@@ -15,12 +15,12 @@
         </el-col>
       </el-form-item>
       <el-form-item  prop="message" >
-        <el-col :span="12">
+        <el-col :span="12" style="text-align:left;">
           <label class="signup-message">{{signupForm.message}}</label>
         </el-col>
       </el-form-item>
-      <el-form-item>
-        <el-col :span="12">
+      <el-form-item >
+        <el-col :span="12" style="text-align:left;">
           <el-button type="primary" @click="submitForm('signupForm')" class="signup-button">注册</el-button>
         </el-col>
       </el-form-item>
@@ -88,6 +88,9 @@
               if(response.data.code === '0'){
                 router.push({name:'SignIn'})
               }
+              else{
+                this.signupForm.message = response.data.message
+              }
             })
           } else {
             return false
@@ -141,5 +144,6 @@
 
   .signup .signup-message{
     color: red;
+    text-align: left;
   }
 </style>
