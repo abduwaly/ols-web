@@ -91,14 +91,14 @@
               config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
               .then(res => {
-                if ('username' in res.data) {
-                  router.push({name: 'Login'})
+                if (-1 === res.data.code) {
+                   this.signupForm.message=res.data.message;
                 } else if ('message' in res.data) {
-                  this.signupForm.message=res.data.message;
+                  router.push({name: 'Login'})
                 }
               })
               .catch(err => {
-                console.log("wwww" + err)
+                console.log(err)
               })
           } else {
             return false
