@@ -57,7 +57,8 @@
 </template>
 
 <script>
-  import api from '@/api'
+  import api from '@/api/index';
+  import router from '@/router/index';
 
   export default {
     data() {
@@ -65,7 +66,6 @@
         signInForm: {
           userName: '',
           password: '',
-          capture: '',
         },
         rules: {
           userName: [
@@ -85,22 +85,12 @@
               'username': this.signInForm.userName,
               'password': this.signInForm.password,
             };
-            Axios({
-              method: 'post',
-              url: '/api/authentication',
-              data: data,
-              config: { headers: {'Content-Type': 'multipart/form-data' }}
+            api.signIn(data).then(response => {
+              console.log(response);
+              if(response.data.code === '0'){
+                router.push({name:'StudyCard'})
+              }
             })
-              .then(res => {
-                if ('username' in res.data) {
-                  router.push({name: 'StudyCard'})
-                } else if ('message' in res.data) {
-                  this.signInForm.message=res.data.message;
-                }
-              })
-              .catch(err => {
-                alert(err)
-              });
           } else {
             return false;
           }

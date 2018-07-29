@@ -7,6 +7,10 @@ const Config = {
 let api = {
   register(data) {
     return axios.post(Config.API_ROOT + "users", data)
+  },
+
+  signIn(data) {
+    return axios.post(Config.API_ROOT + "authentication", data)
   }
 }
 
