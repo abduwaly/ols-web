@@ -3,7 +3,7 @@
     <div class="signup-header">
       <h1>思沃学院</h1>
     </div>
-    <el-form class="signup-body" :model="signupForm" :rules="rules" ref="signupForm" label-width="120px">
+    <el-form class="signup-body" :model="signupForm" :rules="rules" ref="signupForm">
       <el-form-item label="用户名：" prop="userName">
         <el-col :span="12">
           <el-input v-model="signupForm.userName" placeholder="必须是1-10个英文字符，不能有空格"></el-input>
@@ -98,7 +98,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .signup{
     text-align: center;
   }
@@ -110,8 +110,24 @@
     margin:0 auto;
   }
 
+  .signup .el-form-item{
+    position: relative;
+  }
+
+  .signup .el-form-item__label{
+    position:absolute;
+    left:-100px;
+    text-align: right;
+    width: 100px;
+  }
+
+  .signup .el-form-item__content .el-col{
+    width: 100%;
+  }
+
   .signup .signup-body{
     margin:30px auto 0 auto;
+    width:25%;
   }
 
   .signup .signup-button{
