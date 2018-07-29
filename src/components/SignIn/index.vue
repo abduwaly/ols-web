@@ -62,7 +62,7 @@
   export default {
     data() {
       return {
-        signupForm: {
+        ruleForm: {
           userName: '',
           password: '',
           capture: '',
