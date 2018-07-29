@@ -24,6 +24,9 @@
   .center{
     text-align: center;
   }
+  .form-message{
+    color: red;
+  }
 </style>
 <template>
   <div class="page-content">
@@ -42,6 +45,9 @@
           <el-input type="password" v-model="signInForm.password" placeholder="Password"></el-input>
         </el-col>
       </el-form-item>
+      <p>
+        <label class="form-message">{{signInForm.message}}</label>
+      </p>
       <el-form-item>
         <el-col :span="24" class="el-col">
           <el-button class="login-button" type="primary" @click="submitForm('signInForm')">Sign In</el-button>
@@ -66,6 +72,7 @@
         signInForm: {
           userName: '',
           password: '',
+          message: ''
         },
         rules: {
           userName: [
@@ -89,6 +96,8 @@
               console.log(response);
               if(response.data.code === '0'){
                 router.push({name:'StudyCard'})
+              }else{
+                this.signInForm.message = response.data.message;
               }
             })
           } else {
