@@ -1,11 +1,13 @@
-import Axios from 'axios'
+import axios from 'axios'
 
 const Config = {
-  API_ROOT: 'http://localhost:3000/api/'
+  API_ROOT: '/api/'
 }
 
-export default {
+let api = {
   register(data) {
-    return Axios.post(Config.API_ROOT + "users", data)
+    return axios.post(Config.API_ROOT + "users", data)
   }
 }
+
+export default api

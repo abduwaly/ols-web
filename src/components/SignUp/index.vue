@@ -3,7 +3,7 @@
     <div class="signup-header">
       <h1>思沃学院</h1>
     </div>
-    <el-form :model="signupForm" :rules="rules" ref="signupForm" label-width="120px">
+    <el-form class="signup-body" :model="signupForm" :rules="rules" ref="signupForm" label-width="120px">
       <el-form-item label="用户名：" prop="userName">
         <el-col :span="12">
           <el-input v-model="signupForm.userName" placeholder="必须是1-10个英文字符，不能有空格"></el-input>
@@ -16,7 +16,7 @@
       </el-form-item>
       <el-form-item  prop="message" >
         <el-col :span="12">
-          <label v-model="signupForm.message" class="signup-message">{{signupForm.message}}</label>
+          <label class="signup-message">{{signupForm.message}}</label>
         </el-col>
       </el-form-item>
       <el-form-item>
@@ -25,7 +25,7 @@
         </el-col>
       </el-form-item>
       <el-form-item class="signup-login">
-        <el-col >
+        <el-col :span="12">
           <span>已注册？</span>
           <router-link to="/">登陆</router-link>
         </el-col>
@@ -35,9 +35,8 @@
 </template>
 
 <script>
-  import api from '@/api/';
+  import api from '@/api/index';
   import router from '@/router/index';
-  import Axios from 'axios';
 
   export default {
     data() {
@@ -84,22 +83,12 @@
               'name': this.signupForm.userName,
               'password': this.signupForm.password,
             }
-            Axios({
-              method: 'post',
-              url: '/api/users',
-              data: data,
-              config: { headers: {'Content-Type': 'multipart/form-data' }}
+            api.register(data).then(response => {
+              console.log(response)
+              if(response.data.code === '0'){
+                router.push({name:'SignIn'})
+              }
             })
-              .then(res => {
-                if (-1 === res.data.code) {
-                   this.signupForm.message=res.data.message;
-                } else if ('message' in res.data) {
-                  router.push({name: 'Login'})
-                }
-              })
-              .catch(err => {
-                console.log(err)
-              })
           } else {
             return false
           }
@@ -111,14 +100,18 @@
 
 <style scoped>
   .signup{
-    width: 50%;
-    margin-left: 25%;
     text-align: center;
   }
 
   .signup .signup-header{
     border-bottom: gainsboro solid 1px;
     margin-bottom: 20px;
+    width: 50%;
+    margin:0 auto;
+  }
+
+  .signup .signup-body{
+    margin:30px auto 0 auto;
   }
 
   .signup .signup-button{

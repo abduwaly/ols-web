@@ -10,9 +10,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/*':{
-        target:'http://127.0.0.1:8081/',
-        changeOrigin:true,
+      '/api': {
+        target: 'http://ec2-52-83-176-19.cn-northwest-1.compute.amazonaws.com.cn:8081/', // 接口的域名
+        // secure: false,  // 如果是https接口，需要配置这个参数
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
       }
     },
 
